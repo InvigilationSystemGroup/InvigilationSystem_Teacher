@@ -1,0 +1,64 @@
+@charset "UTF-8";
+*{
+    margin: 0;
+    padding: 0;
+}
+body{
+    width: 100%;
+
+    background-image: url("../images/detail03.jpg");
+    background-repeat: no-repeat;
+    background-size: 100%;
+}
+.proBusiness{
+    width: 90%;
+    background-color: rgba(255,255,255,0.3);
+}
+.proBusiness p{
+    margin: 2% 5%;
+}
+.proBimg{
+    width: 20%;
+    float: left;
+}
+.proBinfo{
+    #float: left;
+}
+.segmentHr{
+    width: 90%;
+    #height: 20%;
+}
+.detProInfo{
+    width: 90%;
+    #height: 500px;
+    background-color: rgba(255,255,255,0.3);
+    margin: 0 0 5% 0;
+}
+.prodDiName{
+    text-align: left;
+}
+.proInfoImg{
+    width: 50%;
+    #float: left;
+    margin: 0 auto;
+}
+.proDuImg{
+    width: 100%;
+}
+.proInfoCont{
+    text-align: center;
+    margin: 3% auto;
+}
+.prodetHeader{
+    width: 12%;
+    opacity: 0.9;
+}
+.assessLabel{
+    background-color: rgba(150,150,150,0.8);
+    border-radius: 5%;
+
+}
+.assessImg{
+    width: 100%;
+    margin: 2% 0 0 0;
+}

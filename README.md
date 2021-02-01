@@ -25,6 +25,11 @@
  student_exam_cheat_brief：考生作弊简述（默认为null）  
  student_exam_cheat_detail：考生作弊详情（默认为null）
  
+ - teacher_exam表：教师监考表（多对多）  
+  teacher_exam_id：教师监考id,自增,主键  
+  teacher_exam_exam_id：教师监考的考试序号  
+  teacher_exam_student_id：教工号  
+ 
  - cheat表：作弊信息记录表  
  cheat_id：作弊信息记录id，自增,主键  
  cheat_student_id：作弊考生学号  

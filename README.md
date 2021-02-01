@@ -31,5 +31,3 @@
  cheat_brief：作弊简述  
  cheat_detail：作弊详情  
  cheat_room_id：作弊考试id
- 
- 

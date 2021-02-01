@@ -1,6 +1,6 @@
 # InvigilationSystem_Teacher
- ###在线考试防作弊系统教师端
- ##1.数据库设计  
+ ###在线考试防作弊系统教师端  
+ ##1.数据库设计    
  - student表：学生基本信息表  
  student_id：学生学号，主键  
  student_name：学生姓名  
@@ -26,7 +26,7 @@
  student_exam_cheat_detail：考生作弊详情（默认为null）
  
  - cheat表：作弊信息记录表  
- cheat_id：作弊信息记录id，自增,主键
+ cheat_id：作弊信息记录id，自增,主键  
  cheat_student_id：作弊考生学号  
  cheat_brief：作弊简述  
  cheat_detail：作弊详情  

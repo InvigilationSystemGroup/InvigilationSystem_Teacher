@@ -5,11 +5,17 @@
  student_id：学生学号，主键  
  student_name：学生姓名  
  student_major：学生专业  
+ student_password：学生密码  
     
  - teacher表：教师基本信息表  
  teacher_id：教师工号，主键  
  teacher_name：教师姓名  
- teacher_major：教师专业
+ teacher_major：教师专业  
+ teacher_password：教师密码
+ 
+ - admin表：管理员基本信息表
+ admin_id：管理员账号，主键  
+ admin_password：管理员密码
     
  - exam表：考试信息表  
  exam_id：考试id,自增,主键  
@@ -22,13 +28,14 @@
  student_exam_id：考生考试id,自增,主键  
  student_exam_exam_id：考生参加的考试序号  
  student_exam_student_id：考生学号  
+ student_exam_seat:考生考试座位号  
  student_exam_cheat_brief：考生作弊简述（默认为null）  
  student_exam_cheat_detail：考生作弊详情（默认为null）
  
  - teacher_exam表：教师监考表（多对多）  
   teacher_exam_id：教师监考id,自增,主键  
   teacher_exam_exam_id：教师监考的考试序号  
-  teacher_exam_student_id：教工号  
+  teacher_exam_teacher_id：教工号  
  
  - cheat表：作弊信息记录表  
  cheat_id：作弊信息记录id，自增,主键  

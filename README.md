@@ -1,6 +1,6 @@
 # InvigilationSystem_Teacher
- ###在线考试防作弊系统教师端  
- ##1.数据库设计    
+###在线考试防作弊系统教师端  
+##1.数据库设计    
  - student表：学生基本信息表  
  student_id：学生学号，主键  
  student_name：学生姓名  

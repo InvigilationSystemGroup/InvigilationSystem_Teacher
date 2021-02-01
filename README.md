@@ -13,7 +13,7 @@
  teacher_major：教师专业  
  teacher_password：教师密码
  
- - admin表：管理员基本信息表
+ - admin表：管理员基本信息表  
  admin_id：管理员账号，主键  
  admin_password：管理员密码
     

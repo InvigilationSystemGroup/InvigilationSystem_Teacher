@@ -26,12 +26,13 @@
 
     <!--配置映射文件的位置-->
     <mappers>
-        <mapper resource="mapper/OrderMapper.xml"/>
-        <mapper resource="mapper/BusinessMapper.xml"/>
-        <mapper resource="mapper/ProductMapper.xml"/>
-        <mapper resource="mapper/ConsumerMapper.xml"/>
         <mapper resource="mapper/AdminMapper.xml"/>
-        <mapper resource="mapper/ShopMapper.xml"/>
+        <mapper resource="mapper/StudentMapper.xml"/>
+        <mapper resource="mapper/TeacherMapper.xml"/>
+        <mapper resource="mapper/ExamMapper.xml"/>
+        <mapper resource="mapper/Student_examMapper.xml"/>
+        <mapper resource="mapper/Teacher_examMapper.xml"/>
+        <mapper resource="mapper/CheatMapper.xml"/>
     </mappers>
 
 </configuration>

@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.edu.henu.dao.ExamMapper">
+    <resultMap id="ExamResult" type="cn.edu.henu.bean.Exam">
+        <id property="exam_id" column="exam_id"/>
+        <result property="exam_name" column="exam_name"/>
+        <result property="exam_starttime" column="exam_starttime"/>
+        <result property="exam_endtime" column="exam_endtime"/>
+        <result property="exam_room" column="exam_room"/>
+    </resultMap>
+
+    <!--查询考试：-->
+    <!--查询全部考试-->
+    <select id="findAll" resultMap="ExamResult">
+        select * from exam
+    </select>
+    <!--查询考试总数-->
+    <select id="findAllCount" resultType="int">
+        select count(exam_id) from exam
+    </select>
+    <!--根据条件查询考试-->
+    <select id="findByCondition" resultMap="ExamResult">
+        select * from exam where 1 = 1
+        <if test="exam_id != null and exam_id != '' ">
+            and exam_id = #{exam_id}
+        </if>
+        <if test="exam_name != null and exam_name != '' ">
+            and exam_name = #{exam_name}
+        </if>
+        <if test="exam_starttime != null and exam_starttime != '' ">
+            and exam_starttime = #{exam_starttime}
+        </if>
+        <if test="exam_endtime != null and exam_endtime != '' ">
+            and exam_endtime = #{exam_endtime}
+        </if>
+        <if test="exam_room != null and exam_room != '' ">
+            and exam_room = #{exam_room}
+        </if>
+    </select>
+    <!--根据条件查询考试数量-->
+    <select id="findCountByCondition" resultType="int">
+        select count(exam_id) from exam where 1 = 1
+        <if test="exam_id != null and exam_id != '' ">
+            and exam_id = #{exam_id}
+        </if>
+        <if test="exam_name != null and exam_name != '' ">
+            and exam_name = #{exam_name}
+        </if>
+        <if test="exam_starttime != null and exam_starttime != '' ">
+            and exam_starttime = #{exam_starttime}
+        </if>
+        <if test="exam_endtime != null and exam_endtime != '' ">
+            and exam_endtime = #{exam_endtime}
+        </if>
+        <if test="exam_room != null and exam_room != '' ">
+            and exam_room = #{exam_room}
+        </if>
+    </select>
+
+    <!--添加考试 返回主键exam_id-->
+    <insert id="add" parameterType="cn.edu.henu.bean.Exam" useGeneratedKeys="true" keyProperty="exam_id">
+        insert into exam(exam_id,exam_name,exam_starttime,exam_endtime,exam_room)
+        values(#{exam_id},#{exam_name},#{exam_starttime},#{exam_endtime},#{exam_room})
+    </insert>
+    <!--删除考试-->
+    <delete id="deleteByPrimaryKey" parameterType="Integer">
+        delete from exam where exam_id = #{exam_id}
+    </delete>
+    <!--更新考试-->
+    <update id="update" parameterType="cn.edu.henu.bean.Exam">
+        update exam
+        <set>
+            <if test="exam_name != null and exam_name != '' ">
+                exam_name = #{exam_name},
+            </if>
+            <if test="exam_starttime != null and exam_starttime != '' ">
+                exam_starttime = #{exam_starttime},
+            </if>
+            <if test="exam_endtime != null and exam_endtime != '' ">
+                exam_endtime = #{exam_endtime},
+            </if>
+            <if test="exam_room != null and exam_room != '' ">
+                exam_room = #{exam_room},
+            </if>
+        </set>
+        where exam_id = #{exam_id}
+    </update>
+
+</mapper>

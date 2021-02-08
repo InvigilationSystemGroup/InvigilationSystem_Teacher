@@ -9,9 +9,6 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 
-/**
- *
- */
 @Service("teacherSer")
 public class TeacherServiceImpl implements ITeacherService {
 

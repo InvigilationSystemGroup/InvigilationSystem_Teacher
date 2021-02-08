@@ -1,6 +1,93 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
-        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="cn.edu.henu.dao.TeacherMapper">
+    <resultMap id="TeacherResult" type="cn.edu.henu.bean.Teacher">
+        <id column="teacher_id" property="teacher_id"/>
+        <result column="teacher_password" property="teacher_password"/>
+        <result column="teacher_name" property="teacher_name"/>
+        <result column="teacher_faculty" property="teacher_faculty"/>
+        <result column="teacher_major" property="teacher_major"/>
+    </resultMap>
+
+    <!--查询教师：-->
+    <!--查询全部教师-->
+    <select id="findAll" resultMap="TeacherResult">
+        select * from teacher
+    </select>
+    <!--查询教师总数-->
+    <select id="findAllCount" resultType="int">
+        select count(teacher_id) from teacher
+    </select>
+    <!--根据条件查询教师-->
+    <select id="findByCondition" resultMap="TeacherResult">
+        select * from teacher
+        <where>
+            <if test="teacher_id != null and teacher_id != '' ">
+                and teacher_id = #{teacher_id}
+            </if>
+            <if test="teacher_password != null and teacher_password != '' ">
+                and teacher_password = #{teacher_password}
+            </if>
+            <if test="teacher_name != null and teacher_name != '' ">
+                and teacher_name = #{teacher_name}
+            </if>
+            <if test="teacher_faculty != null and teacher_faculty != '' ">
+                and teacher_faculty = #{teacher_faculty}
+            </if>
+            <if test="teacher_major != null and teacher_major != '' ">
+                and teacher_major = #{teacher_major}
+            </if>
+        </where>
+    </select>
+    <!--根据条件查询教师数量-->
+    <select id="findCountByCondition" resultType="int">
+        select count(teacher_id) from teacher
+        <where>
+            <if test="teacher_id != null and teacher_id != '' ">
+                and teacher_id = #{teacher_id}
+            </if>
+            <if test="teacher_password != null and teacher_password != '' ">
+                and teacher_password = #{teacher_password}
+            </if>
+            <if test="teacher_name != null and teacher_name != '' ">
+                and teacher_name = #{teacher_name}
+            </if>
+            <if test="teacher_faculty != null and teacher_faculty != '' ">
+                and teacher_faculty = #{teacher_faculty}
+            </if>
+            <if test="teacher_major != null and teacher_major != '' ">
+                and teacher_major = #{teacher_major}
+            </if>
+        </where>
+    </select>
+
+    <!--添加教师 返回主键teacher_id-->
+    <insert id="add" parameterType="cn.edu.henu.bean.Teacher" useGeneratedKeys="true" keyProperty="teacher_id">
+        insert into teacher(teacher_id,teacher_password,teacher_name,teacher_faculty,teacher_major)
+        values(#{teacher_id},#{teacher_password},#{teacher_name},#{teacher_faculty},#{teacher_major})
+    </insert>
+    <!--删除教师-->
+    <delete id="deleteByPrimaryKey" parameterType="Integer">
+        delete from teacher where teacher_id = #{teacher_id}
+    </delete>
+    <!--更新教师-->
+    <update id="update" parameterType="cn.edu.henu.bean.Teacher">
+        update teacher
+        <set>
+            <if test="teacher_password != null and teacher_password != '' ">
+                teacher_password = #{teacher_password},
+            </if>
+            <if test="teacher_name != null and teacher_name != '' ">
+                teacher_name = #{teacher_name},
+            </if>
+            <if test="teacher_faculty != null and teacher_faculty != '' ">
+                teacher_faculty = #{teacher_faculty},
+            </if>
+            <if test="teacher_major != null and teacher_major != '' ">
+                teacher_major = #{teacher_major},
+            </if>
+        </set>
+        where teacher_id = #{teacher_id}
+    </update>
 
 </mapper>

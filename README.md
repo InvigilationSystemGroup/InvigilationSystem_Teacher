@@ -17,6 +17,7 @@
 
  - admin表：管理员基本信息表  
  admin_id：管理员账号,主键  
+ admin_name：管理员名称  
  admin_password：管理员密码
     
  - exam表：考试信息表  

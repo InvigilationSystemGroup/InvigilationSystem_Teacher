@@ -2,8 +2,6 @@ package cn.edu.henu.service;
 
 import cn.edu.henu.bean.Teacher;
 
-/**
- */
 public interface ITeacherService {
 
     /**

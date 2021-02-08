@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="">
+    <resultMap id="StudentResult" type="cn.edu.henu.bean.Student">
+        <id column="student_id" property="student_id"/>
+        <result column="student_password" property="student_password"/>
+        <result column="student_name" property="student_name"/>
+        <result column="student_faculty" property="student_faculty"/>
+        <result column="student_major" property="student_major"/>
+    </resultMap>
+
+    <!--查询学生：-->
+    <!--查询全部学生-->
+    <select id="findAll" resultMap="StudentResult">
+        select * from student
+    </select>
+    <!--查询学生总数-->
+    <select id="findAllCount" resultType="int">
+        select count(student_id) from student
+    </select>
+    <!--根据条件查询学生-->
+    <select id="findByCondition" resultMap="StudentResult">
+        select * from student where 1 = 1
+        <if test="student_id != null and student_id != '' ">
+            and student_id = #{student_id}
+        </if>
+        <if test="student_password != null and student_password != '' ">
+            and student_password = #{student_password}
+        </if>
+        <if test="student_name != null and student_name != '' ">
+            and student_name = #{student_name}
+        </if>
+        <if test="student_faculty != null and student_faculty != '' ">
+            and student_faculty = #{student_faculty}
+        </if>
+        <if test="student_major != null and student_major != '' ">
+            and student_major = #{student_major}
+        </if>
+    </select>
+    <!--根据条件查询学生数量-->
+    <select id="findCountByCondition" resultType="int">
+        select count(student_id) from student where 1 = 1
+        <if test="student_id != null and student_id != '' ">
+            and student_id = #{student_id}
+        </if>
+        <if test="student_password != null and student_password != '' ">
+            and student_password = #{student_password}
+        </if>
+        <if test="student_name != null and student_name != '' ">
+            and student_name = #{student_name}
+        </if>
+        <if test="student_faculty != null and student_faculty != '' ">
+            and student_faculty = #{student_faculty}
+        </if>
+        <if test="student_major != null and student_major != '' ">
+            and student_major = #{student_major}
+        </if>
+    </select>
+
+    <!--添加学生 返回主键student_id-->
+    <insert id="add" parameterType="cn.edu.henu.bean.Student" useGeneratedKeys="true" keyProperty="student_id">
+        insert into student(student_id,student_password,student_name,student_faculty,student_major)
+        values(#{student_id},#{student_password},#{student_name},#{student_faculty},#{student_major})
+    </insert>
+    <!--删除学生-->
+    <delete id="deleteByPrimaryKey" parameterType="Integer">
+        delete from student where student_id = #{student_id}
+    </delete>
+    <!--更新学生-->
+    <update id="update" parameterType="cn.edu.henu.bean.Student">
+        update student
+        <set>
+            <if test="student_password != null and student_password != '' ">
+                student_password = #{student_password},
+            </if>
+            <if test="student_name != null and student_name != '' ">
+                student_name = #{student_name},
+            </if>
+            <if test="student_faculty != null and student_faculty != '' ">
+                student_faculty = #{student_faculty},
+            </if>
+            <if test="student_major != null and student_major != '' ">
+                student_major = #{student_major},
+            </if>
+        </set>
+        where student_id = #{student_id}
+    </update>
+
+</mapper>

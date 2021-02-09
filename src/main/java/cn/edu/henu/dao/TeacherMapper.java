@@ -20,7 +20,7 @@ public interface TeacherMapper extends CrudDao<Teacher> {
      * @return
      */
     @Override
-    Teacher findAll();
+    List<Teacher>  findAll();
 
     /**
      * 查询数据总数

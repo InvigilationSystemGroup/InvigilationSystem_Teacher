@@ -16,27 +16,56 @@ public class TeacherServiceImpl implements ITeacherService {
     private TeacherMapper teacherMapper;
 
     @Override
-    public Teacher login(String username, String password) {
-        return null;
+    public Teacher login(String id, String password) {
+        System.out.println("业务层登录校验...");
+        try {
+            Teacher teacher = teacherMapper.findByPrimaryKey(Integer.parseInt(id));
+            if (teacher != null && password.equals(teacher.getTeacher_password())) {
+                return teacher;
+            }
+            return null;
+        } catch (NumberFormatException e) {
+            return null;
+        }
+    }
+
+    @Override
+    public Teacher findSimpleByPrimaryKey(Integer id) {
+        try {
+            return teacherMapper.findByPrimaryKey(id);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+    @Override
+    public Integer add(Teacher teacher) {
+        try {
+            return teacherMapper.add(teacher);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return -1;
+        }
     }
 
     @Override
     public boolean deleteById(Integer id) {
-        return false;
+        try {
+            int i = teacherMapper.deleteByPrimaryKey(id);
+            return i >= 1;
+        } catch (Exception e) {
+            return false;
+        }
     }
 
     @Override
     public boolean update(Teacher teacher) {
-        return false;
-    }
-
-    @Override
-    public Teacher getOneByKey(Integer username) {
-        return null;
-    }
-
-    @Override
-    public Integer save(Teacher teacher) {
-        return null;
+        try {
+            int i = teacherMapper.update(teacher);
+            return i >= 1;
+        } catch (Exception e) {
+            return false;
+        }
     }
 }

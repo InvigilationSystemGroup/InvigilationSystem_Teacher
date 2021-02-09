@@ -24,5 +24,20 @@ import java.util.Map;
 @Controller
 @RequestMapping("/teacher")
 public class TeacherController {
+    @Autowired
+    private ITeacherService teacherSer;
 
+    @RequestMapping("/update")
+    public String updateTeacher(Teacher teacher, HttpSession session) {
+
+        return "redirect:/teacher/home";
+    }
+
+
+    @RequestMapping("/logout")
+    public String teacherLogout(HttpSession session) {
+        session.removeAttribute("teacherLoginInfo");
+        session.invalidate();
+        return "redirect:/login/teacher";
+    }
 }

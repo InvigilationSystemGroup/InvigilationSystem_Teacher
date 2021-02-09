@@ -10,6 +10,10 @@
     </resultMap>
 
     <!--查询教师：-->
+    <!--根据主键id查询教师-->
+    <select id="findByPrimaryKey" resultMap="TeacherResult">
+        select * from teacher where teacher_id = #{teacher_id}
+    </select>
     <!--查询全部教师-->
     <select id="findAll" resultMap="TeacherResult">
         select * from teacher

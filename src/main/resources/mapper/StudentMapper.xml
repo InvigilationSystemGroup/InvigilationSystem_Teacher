@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="">
+<mapper namespace="cn.edu.henu.dao.StudentMapper">
     <resultMap id="StudentResult" type="cn.edu.henu.bean.Student">
         <id column="student_id" property="student_id"/>
         <result column="student_password" property="student_password"/>

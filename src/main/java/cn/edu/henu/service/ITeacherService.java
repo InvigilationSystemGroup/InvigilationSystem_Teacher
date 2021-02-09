@@ -14,6 +14,22 @@ public interface ITeacherService {
     Teacher login(String username, String password);
 
     /**
+     * 根据教师id查询
+     *
+     * @param id
+     * @return Teacher对象
+     */
+    Teacher findSimpleByPrimaryKey(Integer id);
+
+    /**
+     * 添加教师
+     *
+     * @param teacher
+     * @return
+     */
+    Integer add(Teacher teacher);
+
+    /**
      * 根据教师id删除教师
      *
      * @param id
@@ -29,19 +45,6 @@ public interface ITeacherService {
      */
     boolean update(Teacher teacher);
 
-    /**
-     * 根据店铺username查询
-     *
-     * @param username 用户名
-     * @return Teacher对象
-     */
-    Teacher getOneByKey(Integer username);
 
-    /**
-     * 添加教师
-     *
-     * @param teacher
-     * @return
-     */
-    Integer save(Teacher teacher);
+
 }

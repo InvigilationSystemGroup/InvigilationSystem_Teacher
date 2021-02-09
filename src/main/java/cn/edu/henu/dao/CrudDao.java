@@ -14,6 +14,8 @@ public interface CrudDao<T> {
      */
     T findByPrimaryKey(Integer id);
 
+
+
     /**
      * 查询全部数据
      * @return

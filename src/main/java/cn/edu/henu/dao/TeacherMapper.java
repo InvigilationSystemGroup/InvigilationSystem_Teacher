@@ -6,7 +6,7 @@ import java.util.List;
 
 public interface TeacherMapper extends CrudDao<Teacher> {
     /**
-     * 查询单条数据
+     * 根据主键查询一条数据
      *
      * @param id
      * @return
@@ -49,7 +49,7 @@ public interface TeacherMapper extends CrudDao<Teacher> {
     int findCountByCondition(Teacher entity);
 
     /**
-     * 添加数据
+     * 添加数据,返回主键
      *
      * @param entity
      * @return

@@ -1,5 +1,6 @@
 package cn.edu.henu.service.impl;
 
+import cn.edu.henu.bean.PageBean;
 import cn.edu.henu.dao.TeacherMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -14,6 +15,16 @@ public class TeacherServiceImpl implements ITeacherService {
 
     @Autowired
     private TeacherMapper teacherMapper;
+    
+    void initPageBean(PageBean<Teacher> pageBean, Teacher product, Integer row) {
+        pageBean.setRows(row);
+        int total = teacherMapper.findAllCount();
+        pageBean.setTotalCount(total);
+        int rows = pageBean.getRows();
+        int a = total % rows;
+        int b = total / rows;
+        pageBean.setTotalPage(a == 0 ? b : b + 1);
+    }
 
     @Override
     public Teacher login(String id, String password) {
@@ -30,9 +41,28 @@ public class TeacherServiceImpl implements ITeacherService {
     }
 
     @Override
-    public Teacher findSimpleByPrimaryKey(Integer id) {
+    public Teacher findByPrimaryKey(Integer id) {
         try {
             return teacherMapper.findByPrimaryKey(id);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+    @Override
+    public PageBean<Teacher> findByCondition(Teacher teacher,int row) {
+        try {
+            List<Teacher> teachers;
+            if (teacher != null) {
+                teachers = teacherMapper.findByCondition(teacher);
+            } else {
+                teachers = teacherMapper.findAll();
+            }
+            PageBean<Teacher> pageBean = new PageBean<>();
+            initPageBean(pageBean, teacher, row);
+            pageBean.setList(teachers);
+            return pageBean;
         } catch (Exception e) {
             e.printStackTrace();
             return null;

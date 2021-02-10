@@ -103,8 +103,8 @@ public class TeacherMapperTest {
         teacher.setTeacher_password("123456");
         teacher.setTeacher_name("师新");
         teacher.setTeacher_faculty("计算机与信息工程学院");
-        teacher.setTeacher_major("软件工程");
-        teacherMapper.update(teacher);
-        System.out.println(teacher);
+        teacher.setTeacher_major("信息安全");
+        int i = teacherMapper.update(teacher);
+        System.out.println(i);
     }
 }

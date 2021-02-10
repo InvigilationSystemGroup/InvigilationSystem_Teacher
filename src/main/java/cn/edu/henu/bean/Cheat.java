@@ -2,64 +2,64 @@ package cn.edu.henu.bean;
 
 public class Cheat {
     //作弊信息记录序号,自增,主键
-    private int id;
+    private int cheat_id;
     //作弊考生学号
-    private String student_id;
+    private String cheat_student_id;
     //作弊简述
-    private String brief;
+    private String cheat_brief;
     //作弊详情
-    private String detail;
+    private String cheat_detail;
     //作弊考试序号
-    private String exam_id;
+    private String cheat_exam_id;
 
-    public int getId() {
-        return id;
+    public int getCheat_id() {
+        return cheat_id;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public void setCheat_id(int cheat_id) {
+        this.cheat_id = cheat_id;
     }
 
-    public String getStudent_id() {
-        return student_id;
+    public String getCheat_student_id() {
+        return cheat_student_id;
     }
 
-    public void setStudent_id(String student_id) {
-        this.student_id = student_id;
+    public void setCheat_student_id(String cheat_student_id) {
+        this.cheat_student_id = cheat_student_id;
     }
 
-    public String getBrief() {
-        return brief;
+    public String getCheat_brief() {
+        return cheat_brief;
     }
 
-    public void setBrief(String brief) {
-        this.brief = brief;
+    public void setCheat_brief(String cheat_brief) {
+        this.cheat_brief = cheat_brief;
     }
 
-    public String getDetail() {
-        return detail;
+    public String getCheat_detail() {
+        return cheat_detail;
     }
 
-    public void setDetail(String detail) {
-        this.detail = detail;
+    public void setCheat_detail(String cheat_detail) {
+        this.cheat_detail = cheat_detail;
     }
 
-    public String getExam_id() {
-        return exam_id;
+    public String getCheat_exam_id() {
+        return cheat_exam_id;
     }
 
-    public void setExam_id(String exam_id) {
-        this.exam_id = exam_id;
+    public void setCheat_exam_id(String cheat_exam_id) {
+        this.cheat_exam_id = cheat_exam_id;
     }
 
     @Override
     public String toString() {
         return "Cheat{" +
-                "id=" + id +
-                ", student_id='" + student_id + '\'' +
-                ", brief='" + brief + '\'' +
-                ", detail='" + detail + '\'' +
-                ", exam_id='" + exam_id + '\'' +
+                "cheat_id=" + cheat_id +
+                ", cheat_student_id='" + cheat_student_id + '\'' +
+                ", cheat_brief='" + cheat_brief + '\'' +
+                ", cheat_detail='" + cheat_detail + '\'' +
+                ", cheat_exam_id='" + cheat_exam_id + '\'' +
                 '}';
     }
 }

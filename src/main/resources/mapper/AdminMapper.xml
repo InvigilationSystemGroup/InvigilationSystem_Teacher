@@ -22,6 +22,10 @@
         <result property="teacher_exam_exam_id" column="teacher_exam_exam_id"/>
     </resultMap>
 
+    <!--根据主键id查询管理员-->
+    <select id="findByPrimaryKey" resultMap="AdminResult">
+        select * from admin where admin_id = #{admin_id}
+    </select>
     <!--更新管理员-->
     <update id="update" parameterType="cn.edu.henu.bean.Admin">
         update admin

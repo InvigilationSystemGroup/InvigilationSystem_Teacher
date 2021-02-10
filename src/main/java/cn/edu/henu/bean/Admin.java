@@ -2,42 +2,42 @@ package cn.edu.henu.bean;
 
 public class Admin {
     //管理员账号,主键
-    private int id;
+    private int admin_id;
     //管理员名字
-    private int name;
+    private int admin_name;
     //管理员密码
-    private String password;
+    private String admin_password;
 
-    public int getId() {
-        return id;
+    public int getAdmin_id() {
+        return admin_id;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public void setAdmin_id(int admin_id) {
+        this.admin_id = admin_id;
     }
 
-    public int getName() {
-        return name;
+    public int getAdmin_name() {
+        return admin_name;
     }
 
-    public void setName(int name) {
-        this.name = name;
+    public void setAdmin_name(int admin_name) {
+        this.admin_name = admin_name;
     }
 
-    public String getPassword() {
-        return password;
+    public String getAdmin_password() {
+        return admin_password;
     }
 
-    public void setPassword(String password) {
-        this.password = password;
+    public void setAdmin_password(String admin_password) {
+        this.admin_password = admin_password;
     }
 
     @Override
     public String toString() {
         return "Admin{" +
-                "id=" + id +
-                ", name=" + name +
-                ", password='" + password + '\'' +
+                "admin_id=" + admin_id +
+                ", admin_name=" + admin_name +
+                ", admin_password='" + admin_password + '\'' +
                 '}';
     }
 }

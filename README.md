@@ -26,14 +26,14 @@
  exam_starttime：考试开始时间  
  exam_endtime：考试结束时间   
  exam_room：考场名称  
- exam_ipwhite: ip白名单,教师端传 学生端取  
+ exam_ipwhite：ip白名单,教师端传 学生端取  
  exam_ipblack：ip黑名单,教师端传 学生端取  
 
  - student_exam表：学生考试表  
  student_exam_id：考生考试序号,自增,主键  
  student_exam_exam_id：考生参加的考试的考试序号  
  student_exam_student_id：考生学号  
- student_exam_seat:考生考试座位号  
+ student_exam_seat：考生考试座位号  
  student_exam_cheat_brief：考生作弊简述及登录状态（默认为null）  
  student_exam_cheat_detail：考生作弊详情（默认为null）,学生端传操作日志  
  student_exam_unlock：解锁密码,教师端传 学生端取  

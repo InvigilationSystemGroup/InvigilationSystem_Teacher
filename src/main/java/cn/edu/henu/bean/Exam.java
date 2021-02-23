@@ -1,5 +1,9 @@
 package cn.edu.henu.bean;
 
+import net.sf.jsqlparser.expression.DateTimeLiteralExpression;
+
+import java.util.List;
+
 public class Exam {
     //考试序号,自增,主键
     private int exam_id;
@@ -11,6 +15,18 @@ public class Exam {
     private String exam_endtime;
     //考场名称
     private String exam_room;
+    //考场容量
+    private int exam_capacity;
+
+    private String exam_ipwhite;
+
+    private String exam_ipblack;
+    //与学生的关联属性：Student集合
+    private List<Student> students;
+    /*//与学生考试的关联属性：Student_exam集合；一对多
+    private List<Student_exam> student_exams;*/
+    //与教师的关联属性：Teacher集合
+    private List<Teacher> teachers;
 
     public int getExam_id() {
         return exam_id;
@@ -52,6 +68,46 @@ public class Exam {
         this.exam_room = exam_room;
     }
 
+    public int getExam_capacity() {
+        return exam_capacity;
+    }
+
+    public void setExam_capacity(int exam_capacity) {
+        this.exam_capacity = exam_capacity;
+    }
+
+    public List<Student> getStudents() {
+        return students;
+    }
+
+    public void setStudents(List<Student> students) {
+        this.students = students;
+    }
+
+    public List<Teacher> getTeachers() {
+        return teachers;
+    }
+
+    public void setTeachers(List<Teacher> teachers) {
+        this.teachers = teachers;
+    }
+
+    public String getExam_ipwhite() {
+        return exam_ipwhite;
+    }
+
+    public void setExam_ipwhite(String exam_ipwhite) {
+        this.exam_ipwhite = exam_ipwhite;
+    }
+
+    public String getExam_ipblack() {
+        return exam_ipblack;
+    }
+
+    public void setExam_ipblack(String exam_ipblack) {
+        this.exam_ipblack = exam_ipblack;
+    }
+
     @Override
     public String toString() {
         return "Exam{" +
@@ -60,6 +116,11 @@ public class Exam {
                 ", exam_starttime='" + exam_starttime + '\'' +
                 ", exam_endtime='" + exam_endtime + '\'' +
                 ", exam_room='" + exam_room + '\'' +
+                ", exam_capacity=" + exam_capacity +
+                ", exam_ipwhite=" + exam_ipwhite +
+                ", exam_ipblack=" + exam_ipblack +
+                ", students=" + students +
+                ", teachers=" + teachers +
                 '}';
     }
 }

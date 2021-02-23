@@ -26,6 +26,7 @@
  exam_starttime：考试开始时间  
  exam_endtime：考试结束时间   
  exam_room：考场名称  
+ exam_capacity：考场容量
  exam_ipwhite：ip白名单,教师端传 学生端取  
  exam_ipblack：ip黑名单,教师端传 学生端取  
 
@@ -34,14 +35,13 @@
  student_exam_exam_id：考生参加的考试的考试序号  
  student_exam_student_id：考生学号  
  student_exam_seat：考生考试座位号  
- student_exam_cheat_brief：考生作弊简述及登录状态（默认为null）  
- student_exam_cheat_detail：考生作弊详情（默认为null）,学生端传操作日志  
+ student_exam_cheat_brief：考生作弊简述及登录状态（默认为null）,学生端传 教师端取  
+ student_exam_cheat_detail：考生作弊详情（默认为null）,学生端传操作日志 教师端取  
  student_exam_unlock：解锁密码,教师端传 学生端取  
  
  - teacher_exam表：教师监考表  
- teacher_exam_id：教师监考序号,自增,主键  
- teacher_exam_exam_id：教师监考的考试的考试序号  
- teacher_exam_teacher_id：教工号  
+ teacher_exam_exam_id：教师监考的考试的考试序号,联合主键1  
+ teacher_exam_teacher_id：教工号,联合主键2  
  
  - cheat表：作弊信息记录表  
  cheat_id：作弊信息记录序号,自增,主键  
@@ -49,3 +49,6 @@
  cheat_brief：作弊简述  
  cheat_detail：作弊详情  
  cheat_exam_id：作弊考试序号
+ 
+ - warning表：警告信息记录表  
+ 

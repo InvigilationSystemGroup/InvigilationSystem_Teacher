@@ -1,5 +1,7 @@
 package cn.edu.henu.bean;
 
+import java.util.List;
+
 public class Teacher {
     //教师工号,主键
     private int teacher_id;
@@ -11,6 +13,8 @@ public class Teacher {
     private String teacher_faculty;
     //教师专业
     private String teacher_major;
+    //与考试的关联属性：Exam集合
+    private List<Exam> exams;
 
     public int getTeacher_id() {
         return teacher_id;
@@ -52,6 +56,14 @@ public class Teacher {
         this.teacher_major = teacher_major;
     }
 
+    public List<Exam> getExams() {
+        return exams;
+    }
+
+    public void setExams(List<Exam> exams) {
+        this.exams = exams;
+    }
+
     @Override
     public String toString() {
         return "Teacher{" +
@@ -60,6 +72,7 @@ public class Teacher {
                 ", teacher_name='" + teacher_name + '\'' +
                 ", teacher_faculty='" + teacher_faculty + '\'' +
                 ", teacher_major='" + teacher_major + '\'' +
+                ", exams=" + exams +
                 '}';
     }
 }

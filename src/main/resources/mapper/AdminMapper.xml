@@ -7,21 +7,6 @@
         <result property="admin_password" column="admin_password"/>
     </resultMap>
 
-    <resultMap id="Student_examResult" type="cn.edu.henu.bean.Student_exam">
-        <id property="student_exam_id" column="student_exam_id"/>
-        <result property="student_exam_exam_id" column="student_exam_exam_id"/>
-        <result property="student_exam_student_id" column="student_exam_student_id"/>
-        <result property="student_exam_seat" column="student_exam_seat"/>
-        <result property="student_exam_cheat_brief" column="student_exam_cheat_brief"/>
-        <result property="student_exam_cheat_detail" column="student_exam_cheat_detail"/>
-    </resultMap>
-
-    <resultMap id="Teacher_examResult" type="cn.edu.henu.bean.Teacher_exam">
-        <id property="teacher_exam_id" column="teacher_exam_id"/>
-        <result property="teacher_exam_teacher_id" column="teacher_exam_teacher_id"/>
-        <result property="teacher_exam_exam_id" column="teacher_exam_exam_id"/>
-    </resultMap>
-
     <!--根据主键id查询管理员-->
     <select id="findByPrimaryKey" resultMap="AdminResult">
         select * from admin where admin_id = #{admin_id}

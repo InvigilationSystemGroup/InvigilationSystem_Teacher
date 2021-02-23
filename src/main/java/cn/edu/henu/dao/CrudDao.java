@@ -8,6 +8,13 @@ import java.util.List;
 public interface CrudDao<T> {
 
     /**
+     * 根据主键查询一条数据
+     * @param id
+     * @return
+     */
+    T findByPrimaryKey(Integer id);
+
+    /**
      * 查询全部数据
      * @return
      */
@@ -18,13 +25,6 @@ public interface CrudDao<T> {
      * @return
      */
     int findAllCount();
-
-    /**
-     * 根据主键查询一条数据
-     * @param id
-     * @return
-     */
-    T findByPrimaryKey(Integer id);
 
     /**
      * 根据条件查询数据

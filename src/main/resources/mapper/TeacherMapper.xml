@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="cn.edu.henu.dao.TeacherMapper">
+
     <resultMap id="TeacherResult" type="cn.edu.henu.bean.Teacher">
         <id column="teacher_id" property="teacher_id"/>
         <result column="teacher_password" property="teacher_password"/>
@@ -9,6 +10,80 @@
         <result column="teacher_major" property="teacher_major"/>
     </resultMap>
 
+    <resultMap id="TeacherWithExamResult" type="cn.edu.henu.bean.Teacher">
+        <id column="teacher_id" property="teacher_id"/>
+        <result column="teacher_password" property="teacher_password"/>
+        <result column="teacher_name" property="teacher_name"/>
+        <result column="teacher_faculty" property="teacher_faculty"/>
+        <result column="teacher_major" property="teacher_major"/>
+        <!--多对多关联映射 -->
+        <collection property="exams" ofType="cn.edu.henu.bean.Exam">
+            <id property="exam_id" column="exam_id"/>
+            <result property="exam_name" column="exam_name"/>
+            <result property="exam_starttime" column="exam_starttime"/>
+            <result property="exam_endtime" column="exam_endtime"/>
+            <result property="exam_room" column="exam_room"/>
+            <result property="exam_capacity" column="exam_capacity"/>
+            <result property="exam_ipwhite" column="exam_ipwhite"/>
+            <result property="exam_ipblack" column="exam_ipblack"/>
+        </collection>
+    </resultMap>
+
+    <!--——————————————————联表增删查————————————————————————-->
+    <!--teacher和exam多对多：-->
+    <!--查询所有监考教师及其监考任务-->
+    <select id="findAllTeacherWithExam" resultMap="TeacherWithExamResult">
+        select t.*,e.*
+        from teacher t,exam e,teacher_exam te
+        where te.teacher_exam_teacher_id=t.teacher_id
+          and te.teacher_exam_exam_id=e.exam_id
+    </select>
+    <!--查询所有监考教师及其监考任务数量-->
+    <select id="findAllCountTeacherWithExam" resultType="int">
+        select count(*) from teacher_exam
+    </select>
+    <!--查询某场考试的监考教师-->
+    <select id="findTeacherWithExam" resultMap="TeacherWithExamResult">
+        select t.*,e.*
+        from teacher t,exam e,teacher_exam te
+        where te.teacher_exam_teacher_id=t.teacher_id
+          and te.teacher_exam_exam_id=e.exam_id
+          and e.exam_id=#{exam_id}
+    </select>
+    <!--查询某场考试的监考教师数量-->
+    <select id="findTeacherCountWithExam" resultType="int">
+        select count(te.teacher_exam_teacher_id)
+        from teacher_exam te
+        where te.teacher_exam_exam_id=#{teacher_exam_exam_id}
+    </select>
+    <!--为某场考试添加监考教师-->
+    <insert id="addForExam" parameterType="cn.edu.henu.bean.Teacher_exam">
+        insert into teacher_exam(teacher_exam_teacher_id,teacher_exam_exam_id)
+        values(#{teacher_exam_teacher_id},#{teacher_exam_exam_id})
+    </insert>
+    <!--为某场考试批量添加监考教师-->
+    <insert id="batchAddForExam" parameterType="java.util.List">
+        insert into teacher_exam(teacher_exam_teacher_id,teacher_exam_exam_id) values
+        <foreach collection ="list" item="teacher_exam" separator =",">
+            (#{teacher_exam.teacher_exam_teacher_id}, #{teacher_exam.teacher_exam_exam_id})
+        </foreach>
+    </insert>
+    <!--为某场考试删除监考教师-->
+    <delete id="deleteForExam">
+        delete from teacher_exam
+        where teacher_exam_teacher_id = #{teacher_exam_teacher_id}
+          and teacher_exam_exam_id = #{teacher_exam_exam_id}
+    </delete>
+    <!--为某场考试批量删除监考教师-->
+    <delete id="batchDeleteForExam" parameterType="java.util.List">
+        delete from teacher_exam where teacher_exam_teacher_id in
+        <foreach collection ="list" open="(" close=")" separator="," item="teacher_exam_teacher_id">
+            #{teacher_exam_teacher_id}
+        </foreach>
+        and teacher_exam_exam_id = #{teacher_exam_exam_id}
+    </delete>
+
+    <!--——————————————————单表增删改查——————————————————————-->
     <!--查询教师：-->
     <!--根据主键id查询教师-->
     <select id="findByPrimaryKey" resultMap="TeacherResult">
@@ -71,10 +146,17 @@
         values(#{teacher_id},#{teacher_password},#{teacher_name},#{teacher_faculty},#{teacher_major})
     </insert>
     <!--删除教师-->
-    <delete id="deleteByPrimaryKey" parameterType="Integer">
+    <delete id="deleteByPrimaryKey">
         delete from teacher where teacher_id = #{teacher_id}
     </delete>
-    <!--更新教师-->
+    <!--批量删除教师-->
+    <delete id="batchDelete" parameterType="java.util.List">
+        delete from teacher where teacher_id in
+        <foreach collection="list" open="(" close=")" separator="," item="teacher_id">
+            #{teacher_id}
+        </foreach>
+    </delete>
+    <!--根据主键更新教师-->
     <update id="update" parameterType="cn.edu.henu.bean.Teacher">
         update teacher
         <set>

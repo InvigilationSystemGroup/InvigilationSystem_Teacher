@@ -9,7 +9,116 @@
         <result column="student_major" property="student_major"/>
     </resultMap>
 
+    <resultMap id="StudentWithExamResult" type="cn.edu.henu.bean.Student">
+        <id column="student_id" property="student_id"/>
+        <result column="student_password" property="student_password"/>
+        <result column="student_name" property="student_name"/>
+        <result column="student_faculty" property="student_faculty"/>
+        <result column="student_major" property="student_major"/>
+        <!--多对多关联映射 -->
+        <collection property="exams" ofType="cn.edu.henu.bean.Exam">
+            <id property="exam_id" column="exam_id"/>
+            <result property="exam_name" column="exam_name"/>
+            <result property="exam_starttime" column="exam_starttime"/>
+            <result property="exam_endtime" column="exam_endtime"/>
+            <result property="exam_room" column="exam_room"/>
+            <result property="exam_capacity" column="exam_capacity"/>
+            <result property="exam_ipwhite" column="exam_ipwhite"/>
+            <result property="exam_ipblack" column="exam_ipblack"/>
+        </collection>
+    </resultMap>
+
+   <!-- <resultMap id="StudentWithStudent_examResult" type="cn.edu.henu.bean.Student">
+        <id column="student_id" property="student_id"/>
+        <result column="student_password" property="student_password"/>
+        <result column="student_name" property="student_name"/>
+        <result column="student_faculty" property="student_faculty"/>
+        <result column="student_major" property="student_major"/>
+        &lt;!&ndash;多对多关联映射 &ndash;&gt;
+        <collection property="student_exams" ofType="cn.edu.henu.bean.Student_exam">
+            <id property="student_exam_id" column="student_exam_id"/>
+            <result property="student_exam_student_id" column="student_exam_student_id"/>
+            <result property="student_exam_exam_id" column="student_exam_exam_id"/>
+            <result property="student_exam_seat" column="student_exam_seat"/>
+            <result property="student_exam_cheat_brief" column="student_exam_cheat_detail"/>
+            <result property="student_exam_unlock" column="student_exam_unlock"/>
+        </collection>
+    </resultMap>-->
+
+    <!--——————————————————联表增删查————————————————————————-->
+    <!--student和exam多对多：-->
+    <!--查询所有考生及其报名的考试-->
+    <select id="findAllStudentWithExam" resultMap="StudentWithExamResult">
+        select s.*,e.*
+        from student s,exam e,student_exam se
+        where se.student_exam_student_id=s.student_id
+          and se.student_exam_exam_id=e.exam_id
+    </select>
+    <!--查询所有考生及其报名的考试数量-->
+    <select id="findAllCountStudentWithExam" resultType="int">
+        select count(*) from student_exam
+    </select>
+    <!--查询某场考试的考生-->
+    <select id="findStudentWithExam" resultMap="StudentWithExamResult">
+        select s.*,e.*
+        from student s,exam e,student_exam se
+        where se.student_exam_student_id=s.student_id
+          and se.student_exam_exam_id=e.exam_id
+          and e.exam_id=#{exam_id}
+    </select>
+    <!--查询某场考试的考生数量-->
+    <select id="findStudentCountWithExam" resultType="int">
+        select count(se.student_exam_exam_id)
+        from student_exam se
+        where se.student_exam_exam_id=#{student_exam_exam_id}
+    </select>
+    <!--为某场考试添加考生-->
+    <insert id="addForExam" parameterType="cn.edu.henu.bean.Student_exam">
+        insert into student_exam(student_exam_student_id,student_exam_exam_id,student_exam_seat,student_exam_cheat_brief,student_exam_cheat_detail,student_exam_unlock)
+        values (#{student_exam_student_id},#{student_exam_exam_id},#{student_exam_seat},#{student_exam_cheat_brief},#{student_exam_cheat_detail}, #{student_exam_unlock})
+    </insert>
+    <!--为某场考试批量添加考生-->
+    <insert id="batchAddForExam" parameterType="java.util.List">
+        insert into student_exam(student_exam_student_id,student_exam_exam_id,student_exam_seat,student_exam_cheat_brief,student_exam_cheat_detail,student_exam_unlock) values
+        <foreach collection ="list" item="student_exam" separator =",">
+            (#{student_exam.student_exam_student_id},#{student_exam.student_exam_exam_id},#{student_exam.student_exam_seat}, #{student_exam.student_exam_cheat_brief},#{student_exam.student_exam_cheat_detail}, #{student_exam.student_exam_unlock})
+        </foreach>
+    </insert>
+    <!--为某场考试删除考生-->
+    <delete id="deleteForExam">
+        delete from student_exam
+        where student_exam_student_id = #{student_exam_student_id}
+          and student_exam_exam_id = #{student_exam_exam_id}
+    </delete>
+    <!--为某场考试批量删除考生-->
+    <delete id="batchDeleteForExam" parameterType="java.util.List">
+        delete from student_exam where student_exam_student_id in
+        <foreach collection ="list" open="(" close=")" separator="," item="student_exam_student_id">
+            #{student_exam_student_id}
+        </foreach>
+        and student_exam_exam_id = #{student_exam_exam_id}
+    </delete>
+    <!--更新考生-->
+    <update id="updateForExam" parameterType="cn.edu.henu.bean.Student_exam">
+        update student_exam
+        <set>
+            <if test="student_exam_seat != null and student_exam_seat != '' ">
+                student_exam_seat = #{student_exam_seat},
+            </if>
+            <if test="student_exam_unlock != null and student_exam_unlock != '' ">
+                student_exam_unlock = #{student_exam_unlock},
+            </if>
+        </set>
+        where student_exam_student_id = #{student_exam_student_id}
+          and student_exam_exam_id = #{student_exam_exam_id}
+    </update>
+
+    <!--——————————————————单表增删改查——————————————————————-->
     <!--查询学生：-->
+    <!--根据主键id查询学生-->
+    <select id="findByPrimaryKey" resultMap="StudentResult">
+        select * from student where student_id = #{student_id}
+    </select>
     <!--查询全部学生-->
     <select id="findAll" resultMap="StudentResult">
         select * from student
@@ -20,41 +129,45 @@
     </select>
     <!--根据条件查询学生-->
     <select id="findByCondition" resultMap="StudentResult">
-        select * from student where 1 = 1
-        <if test="student_id != null and student_id != '' ">
-            and student_id = #{student_id}
-        </if>
-        <if test="student_password != null and student_password != '' ">
-            and student_password = #{student_password}
-        </if>
-        <if test="student_name != null and student_name != '' ">
-            and student_name = #{student_name}
-        </if>
-        <if test="student_faculty != null and student_faculty != '' ">
-            and student_faculty = #{student_faculty}
-        </if>
-        <if test="student_major != null and student_major != '' ">
-            and student_major = #{student_major}
-        </if>
+        select * from student
+        <where>
+            <if test="student_id != null and student_id != '' ">
+                and student_id = #{student_id}
+            </if>
+            <if test="student_password != null and student_password != '' ">
+                and student_password = #{student_password}
+            </if>
+            <if test="student_name != null and student_name != '' ">
+                and student_name = #{student_name}
+            </if>
+            <if test="student_faculty != null and student_faculty != '' ">
+                and student_faculty = #{student_faculty}
+            </if>
+            <if test="student_major != null and student_major != '' ">
+                and student_major = #{student_major}
+            </if>
+        </where>
     </select>
     <!--根据条件查询学生数量-->
     <select id="findCountByCondition" resultType="int">
-        select count(student_id) from student where 1 = 1
-        <if test="student_id != null and student_id != '' ">
-            and student_id = #{student_id}
-        </if>
-        <if test="student_password != null and student_password != '' ">
-            and student_password = #{student_password}
-        </if>
-        <if test="student_name != null and student_name != '' ">
-            and student_name = #{student_name}
-        </if>
-        <if test="student_faculty != null and student_faculty != '' ">
-            and student_faculty = #{student_faculty}
-        </if>
-        <if test="student_major != null and student_major != '' ">
-            and student_major = #{student_major}
-        </if>
+        select count(student_id) from student
+        <where>
+            <if test="student_id != null and student_id != '' ">
+                and student_id = #{student_id}
+            </if>
+            <if test="student_password != null and student_password != '' ">
+                and student_password = #{student_password}
+            </if>
+            <if test="student_name != null and student_name != '' ">
+                and student_name = #{student_name}
+            </if>
+            <if test="student_faculty != null and student_faculty != '' ">
+                and student_faculty = #{student_faculty}
+            </if>
+            <if test="student_major != null and student_major != '' ">
+                and student_major = #{student_major}
+            </if>
+        </where>
     </select>
 
     <!--添加学生 返回主键student_id-->
@@ -65,6 +178,13 @@
     <!--删除学生-->
     <delete id="deleteByPrimaryKey" parameterType="Integer">
         delete from student where student_id = #{student_id}
+    </delete>
+    <!--批量删除学生-->
+    <delete id="batchDelete" parameterType="java.util.List">
+        delete from student where student_id in
+        <foreach collection="list" open="(" close=")" separator="," item="student_id">
+            #{student_id}
+        </foreach>
     </delete>
     <!--更新学生-->
     <update id="update" parameterType="cn.edu.henu.bean.Student">

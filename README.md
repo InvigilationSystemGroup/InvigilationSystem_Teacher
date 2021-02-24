@@ -26,7 +26,7 @@
  exam_starttime：考试开始时间  
  exam_endtime：考试结束时间   
  exam_room：考场名称  
- exam_capacity：考场容量
+ exam_capacity：考场容量  
  exam_ipwhite：ip白名单,教师端传 学生端取  
  exam_ipblack：ip黑名单,教师端传 学生端取  
 

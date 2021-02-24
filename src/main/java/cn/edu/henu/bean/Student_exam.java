@@ -1,10 +1,10 @@
 package cn.edu.henu.bean;
 
 public class Student_exam {
-    //考生学号,联合主键1
-    private int student_exam_student_id;
-    //考生参加的考试的考试序号,联合主键2
+    //考生参加的考试的考试序号,联合主键1
     private int student_exam_exam_id;
+    //考生学号,联合主键2
+    private int student_exam_student_id;
     //考生考试座位号
     private int student_exam_seat;
     //考生作弊简述及登录状态

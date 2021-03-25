@@ -51,3 +51,92 @@
  
  - warning表：警告信息记录表  
  
+ ##2.教师端后端接口
+ ####（包含基本操作，待补充）
+ ###2.1学生、教师、考试的增删改查：
+ 
+ + ####对教师的增删改查  
+ 
+ http://localhost:8080/InvigilationSystem_Teacher_war_exploded/teacher/login?username=10000001&password=123456  
+ 教师登录
+ 
+ http://localhost:8080/InvigilationSystem_Teacher_war_exploded/teacher/logout  
+ 教师退出
+ 
+ http://localhost:8080/InvigilationSystem_Teacher_war_exploded/teacher/findByCondition?name=&faculty=&major=&id=  
+ 条件查询教师
+ 
+ http://localhost:8080/InvigilationSystem_Teacher_war_exploded/teacher/update?id=10000002&password=111111&name&faculty=国际教育学院&major  
+ 根据教工号更新教师个人信息（id不能为空）
+ 
+ http://localhost:8080/InvigilationSystem_Teacher_war_exploded/teacher/add?id=10000009&password=1111111&name=李师&faculty=国际教育学院&major=计算机科学与技术  
+ 添加教师个人信息（各项均不为空）
+ 
+ http://localhost:8080/InvigilationSystem_Teacher_war_exploded/teacher/deleteOne?id=10000009  
+ 删除教师
+ 
+ _http://localhost:8080/InvigilationSystem_Teacher_war_exploded/teacher/findAllTeachersWithExam  
+ 查询所有有监考任务的监考教师及其监考任务_
+ 
+ http://localhost:8080/InvigilationSystem_Teacher_war_exploded/teacher/findTeachersByExamId?exam_id=1  
+ 查询所选考试的监考教师
+ 
+ _http://localhost:8080/InvigilationSystem_Teacher_war_exploded/teacher/addForExam?teacher_id=10000001&exam_id=2  
+ 为某考试添加监考教师_
+ 
+ _http://localhost:8080/InvigilationSystem_Teacher_war_exploded/teacher/deleteOneForExam?teacher_id=10000001&exam_id=2  
+ 为某考试删除监考教师_
+ 
+ 
+ + ####对学生的增删改查
+ http://localhost:8080/InvigilationSystem_Teacher_war_exploded/student/login?username=1812030001&password=123456  
+ 学生登录
+ 
+ http://localhost:8080/InvigilationSystem_Teacher_war_exploded/student/logout  
+ 学生退出
+ 
+ http://localhost:8080/InvigilationSystem_Teacher_war_exploded/student/findByCondition?name=&faculty=&major=&id=  
+ 条件查询学生
+ 
+ http://localhost:8080/InvigilationSystem_Teacher_war_exploded/student/update?id=1812030001&password=111111&name&faculty=国际教育学院&major  
+ 根据学号更新学生个人信息（id不能为空）
+ 
+ http://localhost:8080/InvigilationSystem_Teacher_war_exploded/student/add?id=1812030010&password=123456&name=张六&faculty=国际教育学院&major=计算机科学与技术  
+ 添加学生个人信息（各项均不为空）
+ 
+ http://localhost:8080/InvigilationSystem_Teacher_war_exploded/student/deleteOne?id=1812030010  
+ 删除学生
+ 
+ _http://localhost:8080/InvigilationSystem_Teacher_war_exploded/student/findAllStudentsWithExam  
+ 查询所有有考试的学生及其参加的考试_
+ 
+ http://localhost:8080/InvigilationSystem_Teacher_war_exploded/student/findStudentsByExamId?exam_id=1  
+ 查询所选考试的考生
+ 
+ _http://localhost:8080/InvigilationSystem_Teacher_war_exploded/student/addForExam?student_id=1812030001&exam_id=8  
+ 为某考试添加考生
+ 
+ http://localhost:8080/InvigilationSystem_Teacher_war_exploded/student/deleteOneForExam?student_id=1812030001&exam_id=8  
+ 为某考试删除考生_
+ 
+ + ####对考试的增删改查
+ http://localhost:8080/InvigilationSystem_Teacher_war_exploded/exam/findExamsByStudentId?student_id=1812030001  
+ 查询某考生参加的考试
+ 
+ http://localhost:8080/InvigilationSystem_Teacher_war_exploded/exam/findExamsByTeacherId?teacher_id=10000001  
+ 查询某教师监考的考试
+ 
+ 为某学生/教师添加/删除考试；查询所有有监考教师/考生的考试及其监考教师/考生。
+ 方法同上述*斜体*方法
+ 
+ + ####对管理员
+ http://localhost:8080/InvigilationSystem_Teacher_war_exploded/admin/login?username=1001&password=admin  
+ 登录
+ 
+ http://localhost:8080/InvigilationSystem_Teacher_war_exploded/admin/logout  
+ 管理员退出
+ 
+ http://localhost:8080/InvigilationSystem_Teacher_war_exploded/admin/update?id=1001&password=111111&name  
+ 根据id更新个人信息（id不能为空）
+
+ 

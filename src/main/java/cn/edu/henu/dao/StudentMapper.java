@@ -25,14 +25,14 @@ public interface StudentMapper extends CrudDao<Student>{
      * @param id
      * @return
      */
-    List<Student> findStudentWithExam(int id);
+    List<Student> findStudentByExam(int id);
 
     /**
      * 查询某场考试的考生数量
      * @param id
      * @return
      */
-    int findStudentCountWithExam(int id);
+    int findStudentCountByExam(int id);
 
     /**
      *为某场考试添加考生

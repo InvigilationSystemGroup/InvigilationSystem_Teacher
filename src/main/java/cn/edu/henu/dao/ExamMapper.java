@@ -16,14 +16,14 @@ public interface ExamMapper  extends CrudDao<Exam> {
      * @param id
      * @return
      */
-    List<Exam> findExamWithTeacher(int id);
+    List<Exam> findExamByTeacher(int id);
 
     /**
      * 查询某位教师的监考任务数量
      * @param id
      * @return
      */
-    int findExamCountWithTeacher(int id);
+    int findExamCountByTeacher(int id);
 
     /**
      *为某位教师添加监考任务
@@ -61,14 +61,14 @@ public interface ExamMapper  extends CrudDao<Exam> {
      * @param id
      * @return
      */
-    List<Exam> findExamWithStudent(int id);
+    List<Exam> findExamByStudent(int id);
 
     /**
      * 查询某位学生参加的考试数量
      * @param id
      * @return
      */
-    int findExamCountWithStudent(int id);
+    int findExamCountByStudent(int id);
 
     /**
      * 为某位学生添加考试

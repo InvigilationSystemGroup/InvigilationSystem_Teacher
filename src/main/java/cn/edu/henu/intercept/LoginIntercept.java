@@ -33,7 +33,7 @@ public class LoginIntercept implements HandlerInterceptor {
      */
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
-        String uri = request.getRequestURI();
+       /* String uri = request.getRequestURI();
 
         Teacher teacher = (Teacher) request.getSession().getAttribute("busLoginInfo");
         Admin admin = (Admin) request.getSession().getAttribute("admLoginInfo");
@@ -56,7 +56,7 @@ public class LoginIntercept implements HandlerInterceptor {
                 request.getRequestDispatcher("/WEB-INF/pages/login&register/first.jsp").forward(request, response);
                 return false;
             }
-        }
+        }*/
         return true;
     }
 

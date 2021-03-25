@@ -25,14 +25,14 @@ public interface TeacherMapper extends CrudDao<Teacher> {
      * @param id
      * @return
      */
-    List<Teacher> findTeacherWithExam(int id);
+    List<Teacher> findTeacherByExam(int id);
 
     /**
      * 查询某场考试的监考教师数量
      * @param id
      * @return
      */
-    int findTeacherCountWithExam(int id);
+    int findTeacherCountByExam(int id);
 
     /**
      *为某场考试添加监考教师

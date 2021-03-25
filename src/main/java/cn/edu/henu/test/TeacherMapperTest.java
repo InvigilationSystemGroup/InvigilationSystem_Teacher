@@ -142,21 +142,21 @@ public class TeacherMapperTest {
         System.out.println(i);
     }
     @Test
-    public void findTeacherWithExam() {
+    public void findTeacherByExam() {
         Teacher teacher=new Teacher();
         Exam exam = new Exam();
         exam.setExam_id(1);
-        List<Teacher> teachers=teacherMapper.findTeacherWithExam(exam.getExam_id());
+        List<Teacher> teachers=teacherMapper.findTeacherByExam(exam.getExam_id());
         //System.out.println(teachers);
         for (Teacher t :  teachers) {
             System.out.println(t);
         }
     }
     @Test
-    public void findTeacherCountWithExam() {
+    public void findTeacherCountByExam() {
         Exam exam = new Exam();
         exam.setExam_id(1);
-        int i=teacherMapper.findTeacherCountWithExam(exam.getExam_id());
+        int i=teacherMapper.findTeacherCountByExam(exam.getExam_id());
         System.out.println(i);
     }
     @Test

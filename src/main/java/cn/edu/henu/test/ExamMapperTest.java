@@ -132,21 +132,21 @@ public class ExamMapperTest {
     //-----------------------------------联表测试-----------------------------------------
     //teacher和exam联表测试
     @Test
-    public void findExamWithTeacher() {
+    public void findExamByTeacher() {
         Exam exam=new Exam();
         Teacher teacher = new Teacher();
         teacher.setTeacher_id(10000001);
-        List<Exam> exams=examMapper.findExamWithTeacher(teacher.getTeacher_id());
+        List<Exam> exams=examMapper.findExamByTeacher(teacher.getTeacher_id());
         //System.out.println(exams);
         for (Exam t :  exams) {
             System.out.println(t);
         }
     }
     @Test
-    public void findExamCountWithTeacher() {
+    public void findExamCountByTeacher() {
         Teacher teacher = new Teacher();
         teacher.setTeacher_id(10000001);
-        int i=examMapper.findExamCountWithTeacher(teacher.getTeacher_id());
+        int i=examMapper.findExamCountByTeacher(teacher.getTeacher_id());
         System.out.println(i);
     }
     @Test
@@ -221,21 +221,21 @@ public class ExamMapperTest {
 
     //student和exam联表测试
     @Test
-    public void findExamWithStudent() {
+    public void findExamByStudent() {
         Exam exam=new Exam();
         Student student = new Student();
         student.setStudent_id(1812030001);
-        List<Exam> exams=examMapper.findExamWithStudent(student.getStudent_id());
+        List<Exam> exams=examMapper.findExamByStudent(student.getStudent_id());
         //System.out.println(exams);
         for (Exam t :  exams) {
             System.out.println(t);
         }
     }
     @Test
-    public void findExamCountWithStudent() {
+    public void findExamCountByStudent() {
         Student student = new Student();
         student.setStudent_id(1812030001);
-        int i=examMapper.findExamCountWithStudent(student.getStudent_id());
+        int i=examMapper.findExamCountByStudent(student.getStudent_id());
         System.out.println(i);
     }
     @Test

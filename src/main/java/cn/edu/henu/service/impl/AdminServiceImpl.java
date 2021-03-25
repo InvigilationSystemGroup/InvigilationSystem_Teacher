@@ -24,7 +24,15 @@ public class AdminServiceImpl implements IAdminService {
             return null;
         }
     }
-
+    @Override
+    public Admin findByPrimaryKey(Integer id) {
+        try {
+            return adminMapper.findByPrimaryKey(id);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
     @Override
     public boolean update(Admin admin) {
         try {

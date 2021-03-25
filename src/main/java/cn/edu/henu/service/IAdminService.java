@@ -14,6 +14,14 @@ public interface IAdminService {
     Admin login(String id, String password);
 
     /**
+     * 根据教师id查询教师
+     * @param id
+     * @return Teacher对象
+     */
+    Admin findByPrimaryKey(Integer id);
+
+
+    /**
      * 修改管理员信息
      * @param admin
      * @return

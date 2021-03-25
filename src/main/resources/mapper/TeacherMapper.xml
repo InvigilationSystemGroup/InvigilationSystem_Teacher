@@ -29,60 +29,6 @@
         </collection>
     </resultMap>
 
-    <!--——————————————————联表增删查————————————————————————-->
-    <!--teacher和exam多对多：-->
-    <!--查询所有监考教师及其监考任务-->
-    <select id="findAllTeacherWithExam" resultMap="TeacherWithExamResult">
-        select t.*,e.*
-        from teacher t,exam e,teacher_exam te
-        where te.teacher_exam_teacher_id=t.teacher_id
-          and te.teacher_exam_exam_id=e.exam_id
-    </select>
-    <!--查询所有监考教师及其监考任务数量-->
-    <select id="findAllCountTeacherWithExam" resultType="int">
-        select count(*) from teacher_exam
-    </select>
-    <!--查询某场考试的监考教师-->
-    <select id="findTeacherWithExam" resultMap="TeacherWithExamResult">
-        select t.*,e.*
-        from teacher t,exam e,teacher_exam te
-        where te.teacher_exam_teacher_id=t.teacher_id
-          and te.teacher_exam_exam_id=e.exam_id
-          and e.exam_id=#{exam_id}
-    </select>
-    <!--查询某场考试的监考教师数量-->
-    <select id="findTeacherCountWithExam" resultType="int">
-        select count(te.teacher_exam_teacher_id)
-        from teacher_exam te
-        where te.teacher_exam_exam_id=#{teacher_exam_exam_id}
-    </select>
-    <!--为某场考试添加监考教师-->
-    <insert id="addForExam" parameterType="cn.edu.henu.bean.Teacher_exam">
-        insert into teacher_exam(teacher_exam_teacher_id,teacher_exam_exam_id)
-        values(#{teacher_exam_teacher_id},#{teacher_exam_exam_id})
-    </insert>
-    <!--为某场考试批量添加监考教师-->
-    <insert id="batchAddForExam" parameterType="java.util.List">
-        insert into teacher_exam(teacher_exam_teacher_id,teacher_exam_exam_id) values
-        <foreach collection ="list" item="teacher_exam" separator =",">
-            (#{teacher_exam.teacher_exam_teacher_id}, #{teacher_exam.teacher_exam_exam_id})
-        </foreach>
-    </insert>
-    <!--为某场考试删除监考教师-->
-    <delete id="deleteForExam">
-        delete from teacher_exam
-        where teacher_exam_teacher_id = #{teacher_exam_teacher_id}
-          and teacher_exam_exam_id = #{teacher_exam_exam_id}
-    </delete>
-    <!--为某场考试批量删除监考教师-->
-    <delete id="batchDeleteForExam" parameterType="java.util.List">
-        delete from teacher_exam where teacher_exam_teacher_id in
-        <foreach collection ="list" open="(" close=")" separator="," item="teacher_exam_teacher_id">
-            #{teacher_exam_teacher_id}
-        </foreach>
-        and teacher_exam_exam_id = #{teacher_exam_exam_id}
-    </delete>
-
     <!--——————————————————单表增删改查——————————————————————-->
     <!--查询教师：-->
     <!--根据主键id查询教师-->
@@ -101,7 +47,7 @@
     <select id="findByCondition" resultMap="TeacherResult">
         select * from teacher
         <where>
-            <if test="teacher_id != null and teacher_id != '' ">
+            <if test="teacher_id != null and teacher_id != 0">
                 and teacher_id = #{teacher_id}
             </if>
             <if test="teacher_password != null and teacher_password != '' ">
@@ -122,7 +68,7 @@
     <select id="findCountByCondition" resultType="int">
         select count(teacher_id) from teacher
         <where>
-            <if test="teacher_id != null and teacher_id != '' ">
+            <if test="teacher_id != null and teacher_id != 0 ">
                 and teacher_id = #{teacher_id}
             </if>
             <if test="teacher_password != null and teacher_password != '' ">
@@ -175,5 +121,59 @@
         </set>
         where teacher_id = #{teacher_id}
     </update>
+
+    <!--——————————————————联表增删查————————————————————————-->
+    <!--teacher和exam多对多：-->
+    <!--查询所有监考教师及其监考任务-->
+    <select id="findAllTeacherWithExam" resultMap="TeacherWithExamResult">
+        select t.*,e.*
+        from teacher t,exam e,teacher_exam te
+        where te.teacher_exam_teacher_id=t.teacher_id
+          and te.teacher_exam_exam_id=e.exam_id
+    </select>
+    <!--查询所有监考教师及其监考任务数量-->
+    <select id="findAllCountTeacherWithExam" resultType="int">
+        select count(*) from teacher_exam
+    </select>
+    <!--查询某场考试的监考教师-->
+    <select id="findTeacherByExam" resultMap="TeacherResult">
+        select t.*,e.*
+        from teacher t,exam e,teacher_exam te
+        where te.teacher_exam_teacher_id=t.teacher_id
+          and te.teacher_exam_exam_id=e.exam_id
+          and e.exam_id=#{exam_id}
+    </select>
+    <!--查询某场考试的监考教师数量-->
+    <select id="findTeacherCountByExam" resultType="int">
+        select count(te.teacher_exam_teacher_id)
+        from teacher_exam te
+        where te.teacher_exam_exam_id=#{teacher_exam_exam_id}
+    </select>
+    <!--为某场考试添加监考教师--><!--同addForTeacher，可删-->
+    <insert id="addForExam" parameterType="cn.edu.henu.bean.Teacher_exam">
+        insert into teacher_exam(teacher_exam_teacher_id,teacher_exam_exam_id)
+        values(#{teacher_exam_teacher_id},#{teacher_exam_exam_id})
+    </insert>
+    <!--为某场考试批量添加监考教师-->
+    <insert id="batchAddForExam" parameterType="java.util.List">
+        insert into teacher_exam(teacher_exam_teacher_id,teacher_exam_exam_id) values
+        <foreach collection ="list" item="teacher_exam" separator =",">
+            (#{teacher_exam.teacher_exam_teacher_id}, #{teacher_exam.teacher_exam_exam_id})
+        </foreach>
+    </insert>
+    <!--为某场考试删除监考教师--><!--同deleteForTeacher，可删-->
+    <delete id="deleteForExam">
+        delete from teacher_exam
+        where teacher_exam_teacher_id = #{teacher_exam_teacher_id}
+          and teacher_exam_exam_id = #{teacher_exam_exam_id}
+    </delete>
+    <!--为某场考试批量删除监考教师-->
+    <delete id="batchDeleteForExam" parameterType="java.util.List">
+        delete from teacher_exam where teacher_exam_teacher_id in
+        <foreach collection ="list" open="(" close=")" separator="," item="teacher_exam_teacher_id">
+            #{teacher_exam_teacher_id}
+        </foreach>
+        and teacher_exam_exam_id = #{teacher_exam_exam_id}
+    </delete>
 
 </mapper>

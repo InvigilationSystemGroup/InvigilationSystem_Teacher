@@ -4,7 +4,7 @@ public class Admin {
     //管理员账号,主键
     private int admin_id;
     //管理员名字
-    private int admin_name;
+    private String admin_name;
     //管理员密码
     private String admin_password;
 
@@ -16,11 +16,11 @@ public class Admin {
         this.admin_id = admin_id;
     }
 
-    public int getAdmin_name() {
+    public String getAdmin_name() {
         return admin_name;
     }
 
-    public void setAdmin_name(int admin_name) {
+    public void setAdmin_name(String admin_name) {
         this.admin_name = admin_name;
     }
 
